@@ -45,8 +45,26 @@ GROUP BY Manufacturers.Code
 HAVING Mean >= 150;
 
 -- 1.15 Select the name and price of the cheapest product.
+SELECT Name, min(Price) FROM Products;
+
 -- 1.16 Select the name of each manufacturer along with the name and price of its most expensive product.
+SELECT Manufacturers.Name, Products.Name, min(Products.Price) 
+FROM Manufacturers LEFT JOIN Products ON Products.Manufacturer == Manufacturers.Code
+GROUP BY Manufacturers.Code;
+
 -- 1.17 Add a new product: Loudspeakers, $70, manufacturer 2.
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(11,'Loudspeakers',70,2);
+
 -- 1.18 Update the name of product 8 to "Laser Printer".
+UPDATE Products
+SET Name = 'Laser Printer'
+WHERE Code == 8;
+
 -- 1.19 Apply a 10% discount to all products.
+UPDATE Products
+SET Price = 0.9 * Price;
+
 -- 1.20 Apply a 10% discount to all products with a price larger than or equal to $120.
+UPDATE Products
+SET Price = 0.9 * Price
+WHERE Price >= 120;
